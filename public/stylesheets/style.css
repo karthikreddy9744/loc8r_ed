@@ -1,139 +1,254 @@
-@import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
 
+/* Headings - use Lobster for elegance */
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-  font-family: 'Lobster', cursive;
-}
-
+h6,
 legend {
   font-family: 'Lobster', cursive;
+  letter-spacing: 0.5px;
 }
 
-.navbar {
-  background-color: #ad1d28;
-  border-color: #911821;
-}
-
-.navbar-light .navbar-brand {
-  font-family: 'Lobster', cursive;
-  color: #fff;
-  }
-.navbar-light .navbar-toggler {
-  color: white;
-  border-color: white;
-
-}
-
-    .navbar-light .navbar-nav .nav-link,
-    .navbar-light .navbar-nav .nav-link:focus,
-    .navbar-light .navbar-nav .nav-link:hover {
-      color: white;
-    }
-
-    .card {
-      background-color: #469ea8;
-      padding: 1rem;
-    }
-
-    .card-primary {
-      border-color: #a2ced3;
-      margin-bottom: 0.5rem;
-    }
-
-    .banner {
-      margin-top: 4em;
-      border-bottom: 1px solid #469ea8;
-      margin-bottom: 1.5em;
-      padding-bottom: 0.5em;
-    }
-
-    .review-header {
-      background-color: #31727a;
-      padding-top: 0.5em;
-      padding-bottom: 0.5em;
-      margin-bottom: 0.5em;
-    }
-
-    .review {
-      margin-right: -16px;
-      margin-left: -16px;
-      margin-bottom: 0.5em;
-    }
-
-    .badge-default, .btn-primary {
-      background-color: #ad1d28;
-      border-color: #911821;
-    }
-
-    h4 a, h4 a:hover {
-      color: #fff;
-    }
-h4 small {
-  font-size: 60%;
-  line-height: 200%;
-  color: #aaa;
-}
-
-h1 small {
-  color: #aaa;
-}
-
-.address {
-  margin-bottom: 0.5rem;
-}
-
-.facilities span.badge {
-  margin-right: 2px;
-}
-
-p {
-  margin-bottom: 0.65rem;
-}
-
-a {
-  color: rgba(255, 255, 255, 0.8)
-}
-
-a:hover {
-  color: #fff
-}
-
+/* Body text - clean Cabin font */
 body {
   font-family: "Cabin", Arial, sans-serif;
-  color: #fff;
-  background-color: coral;
+  color: #212529;
+  /* Bootstrap dark text */
+  background: linear-gradient(135deg, #ff9a8b, #ff6a88, #ff99ac);
+  min-height: 100vh;
 }
+
+/* Navbar (Bootstrap 5) */
+.navbar {
+  background: linear-gradient(90deg, #ad1d28, #911821);
+  padding: 0.75rem 1rem;
+}
+
+.navbar-brand {
+  font-family: 'Lobster', cursive;
+  font-size: 1.6rem;
+  color: #fff !important;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.1);
+  color: #ffe6e6 !important;
+}
+
+.navbar-nav .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  margin: 0 0.25rem;
+  transition: color 0.2s ease-in-out, transform 0.2s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #f8f9fa !important;
+  transform: translateY(-2px);
+}
+
+/* Cards */
+.card {
+  background: #469ea8;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+/* Custom Range Slider */
+.form-range {
+  width: 100%;
+  height: 1rem;
+  padding: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Track */
+.form-range::-webkit-slider-runnable-track {
+  height: 0.6rem;
+  background: linear-gradient(90deg, #ad1d28, #469ea8);
+  border-radius: 10px;
+}
+
+.form-range::-moz-range-track {
+  height: 0.6rem;
+  background: linear-gradient(90deg, #ad1d28, #469ea8);
+  border-radius: 10px;
+}
+
+.form-range::-ms-track {
+  height: 0.6rem;
+  background: linear-gradient(90deg, #ad1d28, #469ea8);
+  border-radius: 10px;
+  border: none;
+  color: transparent;
+}
+
+/* Thumb (the draggable circle) */
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  background: #fff;
+  border: 3px solid #ad1d28;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  margin-top: -0.4rem;
+  transition: all 0.2s ease;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  border-color: #469ea8;
+}
+
+.form-range:active::-webkit-slider-thumb {
+  background: #469ea8;
+  border-color: #ad1d28;
+}
+
+/* For Firefox */
+.form-range::-moz-range-thumb {
+  width: 1.3rem;
+  height: 1.3rem;
+  background: #fff;
+  border: 3px solid #ad1d28;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.form-range::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  border-color: #469ea8;
+}
+
+.form-range:active::-moz-range-thumb {
+  background: #469ea8;
+  border-color: #ad1d28;
+}
+
+/* Label styling */
+.form-label {
+  font-weight: bold;
+  color: #31727a;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+/* Section banner headers */
+.banner {
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #31727a;
+  text-align: center;
+}
+
+.banner h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Reviews */
+.review-header {
+  background: #31727a;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: #fff;
+}
+
+.review {
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #ad1d28 !important;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #911821 !important;
+  transform: scale(1.05);
+}
+
+/* Map Styling */
 .map-container {
   width: 100%;
-  height: 100%;
-  border-radius: 8px;
+  height: 350px;
+  border-radius: 1rem;
   overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1.5rem;
+}
 
-}
-.map-container leaflet-map {
-  display: block;
-}
-.leaflet-container {
-  width: 100% !important;
-  height: 100% !important;
-}
 #map {
   width: 100%;
-  height: 300px;
-  /* increase if you want bigger map */
-  border: 1px solid #ccc;
+  height: 100%;
 }
-.leaflet-control-range {
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
+
 .marker-highlight {
   filter: drop-shadow(0 0 8px gold);
   transition: transform 0.3s ease;
 }
 
-/*# sourceMappingURL=style.css.map */
+.marker-highlight:hover {
+  transform: scale(1.2);
+}
+
+/* Form elements */
+.form-range {
+  accent-color: #ad1d28;
+}
+
+input,
+select,
+textarea {
+  border-radius: 0.5rem !important;
+  border: 1px solid #ddd !important;
+  padding: 0.5rem !important;
+}
+
+/* Links */
+a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #ffd6d6;
+}
+
+/* Utility spacing */
+.address {
+  margin-bottom: 0.5rem;
+}
+
+.facilities span.badge {
+  margin-right: 4px;
+  background: #ad1d28;
+  color: #fff;
+}

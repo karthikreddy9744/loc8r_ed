@@ -6,7 +6,9 @@
   <title>Loc8r</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/bootstrap/css/amelia.bootstrap.css">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
@@ -14,27 +16,26 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-default navbar-fixed-top" ng-controller="navCtrl as nav">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#/">Loc8r</a>
-      </div>
-      <div id="navbar-main" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#/">Home</a></li>
-          <li><a href="#/about">About</a></li>
-          <li ng-if="!nav.isAuthenticated()"><a href="#/login">Sign In</a></li>
-          <li ng-if="!nav.isAuthenticated()"><a href="#/register">Register</a></li>
-  
-          <li ng-if="nav.isAuthenticated() && nav.isAdmin()">
-            <a href="#/location/add">Add Location</a>
-          </li>
-          <li ng-if="nav.isAuthenticated() && nav.isAdmin()">
-            <a href="#/admin/add">Add Admin</a>
-          </li>
-          <li ng-if="nav.isAuthenticated()">
-            <a href="#" ng-click="nav.logout()">Logout ({{nav.username()}})</a>
-          </li>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top" ng-controller="navCtrl as nav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#/">Loc8r</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+        aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#/about">About</a></li>
+          <li class="nav-item" ng-if="!nav.isAuthenticated()"><a class="nav-link" href="#/login">Sign In</a></li>
+          <li class="nav-item" ng-if="!nav.isAuthenticated()"><a class="nav-link" href="#/register">Register</a></li>
+          <li class="nav-item" ng-if="nav.isAuthenticated() && nav.isAdmin()"><a class="nav-link"
+              href="#/location/add">Add Location</a></li>
+          <li class="nav-item" ng-if="nav.isAuthenticated() && nav.isAdmin()"><a class="nav-link" href="#/admin/add">Add
+              Admin</a></li>
+          <li class="nav-item" ng-if="nav.isAuthenticated()"><a class="nav-link" href="#" ng-click="nav.logout()">Logout
+              ({{nav.username()}})</a></li>
         </ul>
       </div>
     </div>
@@ -45,7 +46,8 @@
     <div ng-view></div>
   </div>
 
-  <!-- AngularJS + App Scripts -->
+  <!-- Bootstrap 5 JS + dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
