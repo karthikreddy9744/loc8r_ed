@@ -1,0 +1,9 @@
+<div class="container mt-5">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">❌ An error occurred</h4>
+        <p class="lead" ng-if="vm.message">{{vm.message}}</p>
+        <p ng-if="vm.status">Status code: {{vm.status}}</p>
+        <pre class="bg-light p-3 mt-3" style="white-space: pre-wrap;" ng-if="vm.error">{{vm.error.stack}}</pre>
+    </div>
+    <a class="btn btn-secondary mt-4" href="#!/">⬅️ Back to Home</a>
+</div>

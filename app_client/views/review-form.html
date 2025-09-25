@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-8">
+        <h2>{{ vm.reviewid ? 'Edit Review' : 'Add Review' }}</h2>
+        <form ng-submit="vm.saveReview()">
+            <div class="form-group">
+                <label>Author</label>
+                <input class="form-control" type="text" ng-model="vm.review.author" required>
+            </div>
+
+            <div class="form-group">
+                <label>Rating</label>
+                <input class="form-control" type="number" ng-model="vm.review.rating" min="1" max="5" required>
+            </div>
+
+            <div class="form-group">
+                <label>Review Text</label>
+                <textarea class="form-control" ng-model="vm.review.reviewText" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">{{ vm.reviewid ? 'Update Review' : 'Add Review' }}</button>
+            <a class="btn btn-default" href="#/location/{{vm.locationid}}">Cancel</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const app = require('../app');
+const debug = require('debug')('loc8r:server');
+const http = require('http');
+const mongoose = require('mongoose');
+require('../app_api/models/db'); // ensure models are loaded
+
+/**
+ * Get port from environment and store in Express.
+ */
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+const server = http.createServer(app);
+
+/**
+ * Setup Socket.io
+ */
+const socketIo = require('socket.io');
+const io = socketIo(server);
+const Location = mongoose.model('Location');
+
+// Handle socket connections
+io.on('connection', (socket) => {
+  console.log('🔗 Client connected:', socket.id);
+
+  socket.on('getNearby', async ({ lng, lat, maxDistance }) => {
+    try {
+      const results = await Location.aggregate([
+        {
+          $geoNear: {
+            near: { type: "Point", coordinates: [lng, lat] },
+            distanceField: "dist.calculated",
+            maxDistance: maxDistance,
+            spherical: true
+          }
+        },
+        { $limit: 50 }
+      ]);
+      socket.emit('nearbyResults', results);
+    } catch (err) {
+      console.error("Geo query error:", err);
+      socket.emit('errorMsg', { error: 'Failed to fetch nearby restaurants' });
+    }
+  });
+
+  socket.on('disconnect', () => {
+    console.log('❌ Client disconnected:', socket.id);
+  });
+});
+
+/**
+ * Listen on provided port
+ */
+server.listen(port, () => {
+  console.log(`🚀 Server running on port ${port}`);
+});
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+  if (isNaN(port)) return val;
+  if (port >= 0) return port;
+  return false;
+}
+
+function onError(error) {
+  if (error.syscall !== 'listen') throw error;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+    default:
+      throw error;
+  }
+}
+
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

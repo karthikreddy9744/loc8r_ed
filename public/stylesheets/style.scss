@@ -1,0 +1,22 @@
+// Variables
+$primary-color: #007bff;
+$bg-color: #f8f9fa;
+
+// Body
+body {
+  background-color: $bg-color;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+// Card styling
+.card {
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+// Headings
+h2 {
+  color: $primary-color;
+}

@@ -1,0 +1,37 @@
+<div class="container-fluid" style="height:100vh;">
+    <div class="row" style="height:100%;">
+        <!-- Sidebar: Slider + Restaurant List -->
+        <div class="col-md-4 bg-light p-3" style="overflow-y:auto; height:100%;">
+            <h4 class="mb-3">Nearby Restaurants</h4>
+
+            <!-- Range slider -->
+            <label for="distanceRange" class="form-label">
+                Search Radius (meters): {{ vm.distance }}m
+            </label>
+            <input type="range" class="form-range" id="distanceRange" min="1000" max="250000" step="1000"
+                ng-model="vm.distance" ng-change="vm.requestNearby()">
+
+            <hr>
+
+            <!-- Restaurant List -->
+            <div ng-if="vm.locations.length === 0" class="text-muted">
+                No restaurants found within {{ vm.distance }} meters.
+            </div>
+
+            <div class="list-group">
+                <a ng-repeat="loc in vm.locations" ng-href="#/location/{{ loc._id }}"
+                    class="list-group-item list-group-item-action mb-2 shadow-sm">
+                    <h5 class="mb-1">{{ loc.name }}</h5>
+                    <p class="mb-1 text-muted">{{ loc.address }}</p>
+                    <small>Rating: {{ loc.rating || 'N/A' }}</small>
+                </a>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="col-md-8 p-0" style="height:100%;">
+            <leaflet-map vm-ctrl="vm" locations="vm.locations"
+                style="width:100%; height:100%; display:block;"></leaflet-map>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="row justify-content-center" ng-controller="registerCtrl as vm">
+    <div class="col-md-6">
+        <h3>Register</h3>
+
+        <form ng-submit="vm.register()" novalidate>
+            <div class="form-group mb-2">
+                <label>Username</label>
+                <input type="text" class="form-control" ng-model="vm.user.username" required>
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Password</label>
+                <input type="password" class="form-control" ng-model="vm.user.password" required>
+            </div>
+
+            <!-- optional role input for testing only (remove in production) -->
+            <button class="btn btn-success" type="submit" ng-disabled="vm.loading">
+                {{ vm.loading ? 'Registering...' : 'Register' }}
+            </button>
+
+            <div class="mt-3 text-success" ng-if="vm.message">{{ vm.message }}</div>
+            <div class="mt-3 text-danger" ng-if="vm.error">{{ vm.error }}</div>
+        </form>
+    </div>
+</div>

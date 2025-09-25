@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-md-8">
+        <h2>{{vm.isEdit ? 'Edit Location' : 'Add New Location'}}</h2>
+
+        <form ng-submit="vm.saveLocation()">
+
+            <!-- Name -->
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" type="text" ng-model="vm.location.name" required>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <label>Address</label>
+                <input class="form-control" type="text" ng-model="vm.location.address" required>
+            </div>
+
+            <!-- Facilities -->
+            <div class="form-group">
+                <label>Facilities (comma separated)</label>
+                <input class="form-control" type="text" ng-model="vm.location.facilities"
+                    placeholder="wifi, seats, food">
+            </div>
+
+            <!-- Rating -->
+            <div class="form-group">
+                <label>Rating</label>
+                <input class="form-control" type="number" ng-model="vm.location.rating" min="0" max="5">
+            </div>
+
+            <!-- Map -->
+            <div class="map-container card shadow-sm mt-3" style="width: 100%; max-width: 400px; height: 350px;">
+                <div class="card-body p-2" style="height:100%;">
+                    <h5 class="card-title">Pick Location</h5>
+                    <leaflet-map vm-ctrl="vm"></leaflet-map>
+                    <small class="text-muted">Click or drag the pin to select your location</small>
+                </div>
+            </div>
+
+            <!-- Opening Times -->
+            <div class="mt-3">
+                <h5>Opening Times</h5>
+                <div class="border p-2 mb-2" ng-repeat="time in vm.location.openingTimes">
+                    <div class="form-group">
+                        <label>Days</label>
+                        <input class="form-control" type="text" ng-model="time.days" placeholder="Mon-Fri" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Opening Time</label>
+                        <input class="form-control" type="text" ng-model="time.opening" placeholder="09:00am">
+                    </div>
+                    <div class="form-group">
+                        <label>Closing Time</label>
+                        <input class="form-control" type="text" ng-model="time.closing" placeholder="05:00pm">
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" ng-model="time.closed">
+                        <label class="form-check-label">Closed</label>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-sm mt-2"
+                        ng-click="vm.location.openingTimes.splice($index,1)">Remove</button>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm"
+                    ng-click="vm.location.openingTimes.push({days:'', opening:'', closing:'', closed:false})">
+                    Add Opening Time
+                </button>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-success mt-3">Save Location</button>
+            <a class="btn btn-secondary mt-3" href="#/">Cancel</a>
+
+            <!-- Message -->
+            <div class="mt-2 text-danger" ng-if="vm.message">{{vm.message}}</div>
+
+        </form>
+    </div>
+</div>

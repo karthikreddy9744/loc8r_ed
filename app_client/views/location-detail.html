@@ -1,0 +1,46 @@
+<div class="row" ng-if="vm.location">
+  <div class="col-12">
+    <!-- Restaurant Info -->
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title">{{ vm.location.name }}</h2>
+        <p class="card-text">{{ vm.location.address }}</p>
+        <p class="card-text">Rating: {{ vm.location.rating || '—' }}</p>
+
+        <h4>Facilities</h4>
+        <ul>
+          <li ng-repeat="f in vm.location.facilities">{{ f }}</li>
+        </ul>
+
+        <h4>Opening Times</h4>
+        <ul>
+          <li ng-repeat="ot in vm.location.openingTimes">
+            <span ng-if="ot.closed">{{ ot.days }}: Closed</span>
+            <span ng-if="!ot.closed">{{ ot.days }}: {{ ot.opening }} – {{ ot.closing }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body p-0" style="height: 400px; border-radius: 8px; overflow: hidden;">
+        <leaflet-map vm-ctrl="vm" locations="[vm.location]"></leaflet-map>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h4>Reviews</h4>
+        <div ng-repeat="r in vm.location.reviews" class="card mb-2 p-2">
+          <strong>{{ r.author }}</strong> — Rating: {{ r.rating }}<br>
+          <p>{{ r.reviewText }}</p>
+          <a class="btn btn-warning btn-sm" href="#/location/{{ vm.location._id }}/review/{{ r._id }}/edit">Edit</a>
+          <button class="btn btn-danger btn-sm" ng-click="vm.deleteReview(r._id)">Delete</button>
+        </div>
+        <a class="btn btn-success mt-2" href="#/location/{{ vm.location._id }}/review/add">Add Review</a>
+      </div>
+    </div>
+  </div>
+</div>
