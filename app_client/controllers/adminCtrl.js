@@ -20,7 +20,7 @@
         vm.loading = true;
 
         // POST to backend admin creation endpoint
-        $http.post('/api/create-admin', {
+        $http.post('/api/admin/add', {
           username: vm.username,
           password: vm.password
         }).then(function(res) {

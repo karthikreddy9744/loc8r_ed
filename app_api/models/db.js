@@ -50,4 +50,4 @@ process.on('SIGTERM', async () => {
 
 // --- Load models ---
 require('./location');
-// require('./user');
+require('./user');

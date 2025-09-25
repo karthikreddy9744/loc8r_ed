@@ -12,6 +12,7 @@ const logger       = require('morgan');
 // --- Routes ---
 const apiRoutes = require('./app_api/routes/index');     // API routes
 const usersRoutes = require('./app_api/routes/users');
+const adminRoutes = require('./app_api/routes/admin');
 // --- Init app ---
 const app = express();
 
@@ -19,6 +20,7 @@ const app = express();
 // --- Middleware ---
 app.use(logger('dev'));
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -29,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'app_client')));
 // --- API endpoints ---
 app.use('/api', usersRoutes);
 app.use('/api', apiRoutes);
+app.use('/api', adminRoutes);
 
 // --- Angular fallback ---
 // For any other route, send Angular index.html
