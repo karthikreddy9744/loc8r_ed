@@ -45,6 +45,16 @@
           controller: 'aboutCtrl',
           controllerAs: 'vm'
         })
+        .when('/profile', {
+          templateUrl: 'views/profile.html',
+          controller: 'profileCtrl',
+          controllerAs: 'vm'
+        })
+        .when('/profile/edit', {
+          templateUrl: 'views/profile-edit.html',
+          controller: 'profileEditCtrl',
+          controllerAs: 'vm'
+      })
         .when('/location/add', {
           templateUrl: 'views/location-form.html',
           controller: 'locationFormCtrl',

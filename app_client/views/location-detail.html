@@ -30,17 +30,18 @@
     </div>
 
     <!-- Reviews -->
-    <div class="card mb-3 shadow-sm">
-      <div class="card-body">
-        <h4>Reviews</h4>
-        <div ng-repeat="r in vm.location.reviews" class="card mb-2 p-2">
-          <strong>{{ r.author }}</strong> — Rating: {{ r.rating }}<br>
-          <p>{{ r.reviewText }}</p>
-          <a class="btn btn-warning btn-sm" href="#/location/{{ vm.location._id }}/review/{{ r._id }}/edit">Edit</a>
-          <button class="btn btn-danger btn-sm" ng-click="vm.deleteReview(r._id)">Delete</button>
-        </div>
-        <a class="btn btn-success mt-2" href="#/location/{{ vm.location._id }}/review/add">Add Review</a>
+  <!-- Reviews -->
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <h4>Reviews</h4>
+      <div ng-repeat="r in vm.location.reviews" class="card mb-2 p-2">
+        <strong>{{ r.author.name || 'Anonymous' }}</strong> — Rating: {{ r.rating }}<br>
+        <p>{{ r.reviewText }}</p>
+        <a class="btn btn-warning btn-sm" href="#/location/{{ vm.location._id }}/review/{{ r._id }}/edit">Edit</a>
+        <button class="btn btn-danger btn-sm" ng-click="vm.deleteReview(r._id)">Delete</button>
       </div>
+      <a class="btn btn-success mt-2" href="#/location/{{ vm.location._id }}/review/add">Add Review</a>
     </div>
+  </div>
   </div>
 </div>

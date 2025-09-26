@@ -5,10 +5,9 @@ const mongoose = require('mongoose');
 const reviewSchema = new mongoose.Schema(
   {
     author: {
-      type: String,
-      required: [true, 'Author name is required'],
-      trim: true,
-      maxlength: 100,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
     },
     rating: {
       type: Number,

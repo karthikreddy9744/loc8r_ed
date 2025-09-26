@@ -24,15 +24,14 @@ exports.requireAdmin = function (req, res, next) {
 };
 
 exports.requireAuth = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) return res.status(401).json({ message: 'Unauthorized' });
+  const token = req.headers.authorization?.split(' ')[1]; // Bearer <token>
+  if (!token) return res.status(401).json({ message: 'Unauthorized' });
 
-  const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // Attach user info to request
+    req.user = decoded; // decoded must include _id
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Invalid token' });
+    res.status(401).json({ message: 'Invalid token' });
   }
 };

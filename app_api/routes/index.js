@@ -29,18 +29,35 @@ router.delete('/locations/:locationid', auth.verifyUser, auth.requireAdmin,  ctr
 
 /* ----------------- Review Routes ----------------- */
 
-// POST new review for a location
-router.post('/locations/:locationid/reviews', ctrlLocations.reviewsCreate);
+// POST a review - only authenticated users
+router.post(
+  '/locations/:locationid/reviews',
+  auth.requireAuth,               // <--- add this
+  ctrlLocations.reviewsCreate
+);
 
-// GET a single review
-router.get('/locations/:locationid/reviews/:reviewid', ctrlLocations.reviewsReadOne);
+// GET a single review - public
+router.get(
+  '/locations/:locationid/reviews/:reviewid',
+  ctrlLocations.reviewsReadOne
+);
 
-// PUT update review
-router.put('/locations/:locationid/reviews/:reviewid', ctrlLocations.reviewsUpdateOne);
+// PUT update review - only author (must be authenticated)
+router.put(
+  '/locations/:locationid/reviews/:reviewid',
+  auth.requireAuth,               // <--- add this
+  ctrlLocations.reviewsUpdateOne
+);
 
-// DELETE review
-router.delete('/locations/:locationid/reviews/:reviewid', ctrlLocations.reviewsDeleteOne);
+// DELETE review - only author (must be authenticated)
+router.delete(
+  '/locations/:locationid/reviews/:reviewid',
+  auth.requireAuth,               // <--- add this
+  ctrlLocations.reviewsDeleteOne
+);
 
+// GET all reviews of the logged-in user
+router.get('/profile/reviews', auth.requireAuth, ctrlLocations.getUserReviews);
 
 
 module.exports = router;

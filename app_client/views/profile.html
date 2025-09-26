@@ -1,0 +1,65 @@
+<div class="container mt-5" ng-controller="profileCtrl as vm">
+
+    <h2 class="mb-4 text-center">User Profile</h2>
+    <p class="text-success text-center" ng-if="vm.message">{{ vm.message }}</p>
+
+    <!-- Profile Display -->
+    <div ng-if="vm.user && vm.user._id" class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body d-flex flex-column flex-md-row align-items-center">
+
+                    <!-- Avatar -->
+                    <img ng-src="{{ vm.user.avatar || '/images/default-avatar.png' }}"
+                        class="rounded-circle border border-2 me-md-4 mb-3 mb-md-0" width="140" height="140"
+                        alt="Profile Photo">
+
+                    <!-- User Info -->
+                    <div class="flex-grow-1">
+                        <h4 class="mb-1">{{ vm.user.name || vm.user.username }}</h4>
+                        <p class="text-muted mb-1"><i class="bi bi-envelope"></i> {{ vm.user.email || 'No Email' }}</p>
+                        <p class="text-muted mb-1"><i class="bi bi-telephone"></i> {{ vm.user.phone || 'No Phone' }}</p>
+                        <p class="text-muted mb-1"><i class="bi bi-geo-alt"></i> {{ vm.user.address || 'No Address' }}
+                        </p>
+                        <p class="text-muted mb-1"><i class="bi bi-card-text"></i> {{ vm.user.bio || 'No Bio Available'
+                            }}</p>
+                        <button class="btn btn-primary btn-sm mt-2" ng-click="vm.goToUpdateProfile()">Edit
+                            Profile</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Your Reviews</h5>
+                </div>
+                <div class="card-body" ng-if="vm.reviews.length > 0">
+                    <div ng-repeat="review in vm.reviews" class="card mb-3 p-3">
+                        <h6 class="mb-1">{{ review.locationName }}</h6>
+                        <p class="mb-1">Rating: <strong>{{ review.rating }}/5</strong></p>
+                        <p class="mb-1">{{ review.reviewText }}</p>
+                        <small class="text-muted">On {{ review.createdOn | date:'medium' }}</small>
+                        <div>
+                        <button class="btn btn-danger btn-sm mt-1" ng-click="vm.deleteReview(review.locationId, review.reviewId)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" ng-if="vm.reviews.length === 0">
+                    <p class="text-muted">No reviews yet.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- No profile yet -->
+    <div ng-if="!vm.user || !vm.user._id" class="text-center">
+        <div class="alert alert-info">No profile info available. Please update your profile.</div>
+        <button class="btn btn-primary btn-sm" ng-click="vm.goToUpdateProfile()">Create Profile</button>
+    </div>
+
+</div>
